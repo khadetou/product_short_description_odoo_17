@@ -2,16 +2,22 @@
 <odoo>
     <template id="report_invoice_document_short_description" inherit_id="account.report_invoice_document">
         <!-- Add image column in header -->
+        <xpath expr="//table[hasclass('table', 'table-sm')]" position="attributes">
+            <attribute name="class">table table-sm o_main_table border</attribute>
+        </xpath>
+
         <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[1]" position="before">
-            <th class="text-center">
+            <th class="text-center border-end" style="width: 100px; padding: 8px;">
                 <span>Image</span>
             </th>
         </xpath>
 
         <!-- Add image column in body -->
         <xpath expr="//table[hasclass('table', 'table-sm')]/tbody//td[1]" position="before">
-            <td class="text-center align-middle" style="max-width: 80px;">
-                <img t-if="line.product_id.image_128" t-att-src="image_data_uri(line.product_id.image_128)" style="max-height: 64px;"/>
+            <td class="text-center align-middle border-end" style="width: 100px; padding: 8px;">
+                <div class="p-2">
+                    <img t-if="line.product_id.image_128" t-att-src="image_data_uri(line.product_id.image_128)" style="max-height: 64px; max-width: 64px; object-fit: contain;" class="border rounded shadow-sm"/>
+                </div>
             </td>
         </xpath>
 
@@ -21,6 +27,11 @@
 
         <!-- Remove tax column in body -->
         <xpath expr="//table[hasclass('table', 'table-sm')]/tbody//td[@name='td_taxes']" position="replace">
+        </xpath>
+
+        <!-- Add borders to other cells -->
+        <xpath expr="//table[hasclass('table', 'table-sm')]//th" position="attributes">
+            <attribute name="class" add="border-bottom" separator=" "/>
         </xpath>
     </template>
 </odoo> 
