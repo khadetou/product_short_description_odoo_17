@@ -12,6 +12,24 @@
             </th>
         </xpath>
 
+        <!-- Add borders to header cells -->
+        <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[@name='th_description']" position="attributes">
+            <attribute name="class">text-start border</attribute>
+            <attribute name="style">padding: 8px;</attribute>
+        </xpath>
+        <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[@name='th_quantity']" position="attributes">
+            <attribute name="class">text-end border</attribute>
+            <attribute name="style">padding: 8px;</attribute>
+        </xpath>
+        <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[@name='th_priceunit']" position="attributes">
+            <attribute name="class">text-end border</attribute>
+            <attribute name="style">padding: 8px;</attribute>
+        </xpath>
+        <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[@name='th_subtotal']" position="attributes">
+            <attribute name="class">text-end border</attribute>
+            <attribute name="style">padding: 8px;</attribute>
+        </xpath>
+
         <!-- Add image column in body -->
         <xpath expr="//table[hasclass('table', 'table-sm')]/tbody//td[1]" position="before">
             <td class="text-center align-middle border" style="width: 100px; padding: 8px;">
@@ -43,7 +61,7 @@
         <!-- Modify quantity column -->
         <xpath expr="//td[@name='td_quantity']" position="replace">
             <td name="td_quantity" class="text-end border" style="padding: 8px;">
-                <span t-field="line.quantity"/>
+                <span t-field="line.quantity" t-options='{"widget": "integer"}'/>
             </td>
         </xpath>
 
