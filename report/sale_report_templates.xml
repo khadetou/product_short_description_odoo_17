@@ -7,17 +7,30 @@
         </xpath>
 
         <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[1]" position="before">
-            <th class="text-center border-end" style="width: 100px; padding: 8px;">
+            <th class="text-center border" style="width: 100px; padding: 8px;">
                 <span>Image</span>
             </th>
         </xpath>
 
         <!-- Add image column in body -->
         <xpath expr="//table[hasclass('table', 'table-sm')]/tbody//td[1]" position="before">
-            <td class="text-center align-middle border-end" style="width: 100px; padding: 8px;">
+            <td class="text-center align-middle border" style="width: 100px; padding: 8px;">
                 <div class="p-2">
                     <img t-if="line.product_id.image_128" t-att-src="image_data_uri(line.product_id.image_128)" style="max-height: 64px; max-width: 64px; object-fit: contain;" class="border rounded shadow-sm"/>
                 </div>
+            </td>
+        </xpath>
+
+        <!-- Modify description to include product name -->
+        <xpath expr="//td[@name='td_name']" position="replace">
+            <td name="td_name" class="border">
+                <div t-if="not line.display_type">
+                    <strong t-field="line.product_id.name" class="d-block mb-2"/>
+                    <span t-field="line.name"/>
+                </div>
+                <t t-else="">
+                    <span t-field="line.name"/>
+                </t>
             </td>
         </xpath>
 
@@ -29,9 +42,12 @@
         <xpath expr="//table[hasclass('table', 'table-sm')]/tbody//td[@name='td_taxes']" position="replace">
         </xpath>
 
-        <!-- Add borders to other cells -->
+        <!-- Add borders to all cells -->
         <xpath expr="//table[hasclass('table', 'table-sm')]//th" position="attributes">
-            <attribute name="class" add="border-bottom" separator=" "/>
+            <attribute name="class" add="border" separator=" "/>
+        </xpath>
+        <xpath expr="//table[hasclass('table', 'table-sm')]//td" position="attributes">
+            <attribute name="class" add="border" separator=" "/>
         </xpath>
     </template>
 </odoo> 
