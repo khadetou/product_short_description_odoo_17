@@ -21,11 +21,17 @@
             </td>
         </xpath>
 
-        <!-- Modify description to include product name -->
+        <!-- Modify description to include product name with variant -->
         <xpath expr="//td[@name='account_invoice_line_name']" position="replace">
             <td name="account_invoice_line_name" class="border">
                 <div t-if="line.display_type == 'product'">
-                    <strong t-field="line.product_id.name" class="d-block mb-2"/>
+                    <strong class="d-block mb-2">
+                        <t t-esc="line.product_id.name"/>
+                        <t t-if="line.product_id.product_template_attribute_value_ids">
+                            (                            <t t-esc="', '.join(line.product_id.product_template_attribute_value_ids.mapped('name'))"/>
+)
+                        </t>
+                    </strong>
                     <span t-field="line.name"/>
                 </div>
                 <t t-else="">
