@@ -40,6 +40,25 @@
             </td>
         </xpath>
 
+        <!-- Modify quantity column -->
+        <xpath expr="//td[@name='td_quantity']" position="replace">
+            <td name="td_quantity" class="text-end border" style="padding: 8px;">
+                <span t-field="line.product_uom_qty"/>
+            </td>
+        </xpath>
+
+        <!-- Add border to unit price -->
+        <xpath expr="//td[@name='td_priceunit']" position="attributes">
+            <attribute name="class">text-end border</attribute>
+            <attribute name="style">padding: 8px;</attribute>
+        </xpath>
+
+        <!-- Add border to amount -->
+        <xpath expr="//td[@name='td_subtotal']" position="attributes">
+            <attribute name="class">text-end border o_price_total</attribute>
+            <attribute name="style">padding: 8px;</attribute>
+        </xpath>
+
         <!-- Remove tax column in header -->
         <xpath expr="//table[hasclass('table', 'table-sm')]/thead/tr/th[@name='th_taxes']" position="replace">
         </xpath>
@@ -51,6 +70,7 @@
         <!-- Add borders to all cells -->
         <xpath expr="//table[hasclass('table', 'table-sm')]//th" position="attributes">
             <attribute name="class" add="border" separator=" "/>
+            <attribute name="style">padding: 8px;</attribute>
         </xpath>
         <xpath expr="//table[hasclass('table', 'table-sm')]//td" position="attributes">
             <attribute name="class" add="border" separator=" "/>
